@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { TopRoutingModule } from './top-routing.module';
 import { TopComponent } from './top/top.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [TopComponent],
-  imports: [CommonModule, TopRoutingModule],
+  imports: [CommonModule, TopRoutingModule, MatButtonModule],
 })
 export class TopModule {}
