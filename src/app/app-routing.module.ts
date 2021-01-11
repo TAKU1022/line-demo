@@ -8,6 +8,11 @@ const routes: Routes = [
     loadChildren: () => import('./top/top.module').then((m) => m.TopModule),
   },
   {
+    path: 'welcome',
+    loadChildren: () =>
+      import('./welcome/welcome.module').then((m) => m.WelcomeModule),
+  },
+  {
     path: 'created-room-list',
     loadChildren: () =>
       import('./created-room-list/created-room-list.module').then(
