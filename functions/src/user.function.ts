@@ -13,8 +13,27 @@ export const createUser = functions
       name: user.displayName,
       avaterURL: user.photoURL,
       activeRoomId: null,
-      joinedRoomIds: null,
       createdAt: new Date(),
       updateAt: new Date(),
     });
+  });
+
+export const addUserCreatedRoomId = functions
+  .region('asia-northeast1')
+  .firestore.document('rooms/{roomId}')
+  .onCreate((snap) => {
+    const room = snap.data();
+    return db
+      .doc(`users/${room.ownerId}/createdRoomIds/${room.roomId}`)
+      .set({ createdRoomId: room.roomId });
+  });
+
+export const addUserJoinedRoomId = functions
+  .region('asia-northeast1')
+  .firestore.document('rooms/{roomId}')
+  .onCreate((snap) => {
+    const room = snap.data();
+    return db
+      .doc(`users/${room.ownerId}/joinedRoomIds/${room.roomId}`)
+      .set({ joinedRoomId: room.roomId });
   });
