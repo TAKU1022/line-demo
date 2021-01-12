@@ -8,6 +8,4 @@ export interface Room {
   iconURL: string;
   createdAt: firestore.Timestamp;
   updateAt: firestore.Timestamp;
-  joinedUserIds: string[];
-  entorylogs: string[];
 }
