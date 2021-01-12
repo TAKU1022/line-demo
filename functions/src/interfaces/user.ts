@@ -5,7 +5,6 @@ export interface User {
   name: string;
   avaterURL: string;
   activeRoomId: string;
-  joinedRoomIds: string[];
   createdAt: firestore.Timestamp;
   updateAt: firestore.Timestamp;
 }
