@@ -13,15 +13,16 @@ import { switchMap } from 'rxjs/operators';
 })
 export class AuthService {
   afUser: Observable<firebase.User> = this.afAuth.user;
-  // user$: Observable<User> = this.afUser.pipe(
-  //   switchMap((user: firebase.User) => {
-  //     if (user) {
-  //       return this.db.doc(`users/${user.uid}`).valueChanges();
-  //     } else {
-  //       return of(null);
-  //     }
-  //   })
-  // );
+  user$: Observable<User> = this.afUser.pipe(
+    switchMap((user: firebase.User) => {
+      if (user) {
+        return this.db.doc(`users/${user.uid}`).valueChanges();
+      } else {
+        return of(null);
+      }
+    })
+  );
+  userId: string;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -29,7 +30,10 @@ export class AuthService {
     private router: Router,
     private snackBar: MatSnackBar
   ) {
-    this.afUser.subscribe((user: firebase.User) => console.log(user?.uid));
+    this.afUser.subscribe((user: firebase.User) => {
+      console.log(user?.uid);
+      this.userId = user?.uid;
+    });
   }
 
   loginWithGoole(): Promise<void> {
