@@ -1,14 +1,4 @@
 <div class="container">
-  <h1>ページ遷移</h1>
-  <ul class="nav-content">
-    <li class="nav-content__list-item">
-      <a routerLink="created-room-list">自分が作成した部屋一覧</a>
-    </li>
-    <li class="nav-content__list-item">
-      <a routerLink="joined-room-list">自分が参加している部屋一覧</a>
-    </li>
-  </ul>
-
   <h1>ルーム作成</h1>
   <form [formGroup]="roomForm" class="form" (ngSubmit)="submit()">
     <mat-form-field appearance="outline" [hideRequiredMarker]="true">
@@ -46,7 +36,7 @@
     </button>
   </form>
 
-  <h1>部屋一覧</h1>
+  <h1>ルーム一覧</h1>
   <div class="grid">
     <ng-container *ngFor="let room of rooms$ | async">
       <mat-card>
@@ -63,6 +53,16 @@
       </mat-card>
     </ng-container>
   </div>
+
+  <h1>ページ遷移</h1>
+  <ul class="nav-content">
+    <li class="nav-content__list-item">
+      <a routerLink="created-room-list">自分が作成したルーム一覧</a>
+    </li>
+    <li class="nav-content__list-item">
+      <a routerLink="joined-room-list">自分が参加しているルーム一覧</a>
+    </li>
+  </ul>
 
   <button mat-raised-button color="primary" (click)="logout()">
     ログアウト
