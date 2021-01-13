@@ -4,6 +4,9 @@ service cloud.firestore {
     match /users/{userId} {
       allow read, write: if true;
     }
+     match /users/{userId}/createdRoomIds/{createdRoomId} {
+      allow read, write: if true;
+    }
     match /users/{userId}/joinedRoomIds/{joinedRoomId} {
       allow read, write: if true;
     }
