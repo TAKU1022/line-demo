@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Room } from '@interfaces/room';
 import firebase from 'firebase/app';
-import { Observable } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -30,5 +31,39 @@ export class RoomService {
     return this.db
       .doc(`rooms/${roomId}/joinedUserIds/${userId}`)
       .set({ joinedUserId: userId });
+  }
+
+  getRoomById(roomId: string): Observable<Room> {
+    return this.db.doc<Room>(`rooms/${roomId}`).valueChanges();
+  }
+
+  getCreatedRooms(userId: string): Observable<Room[]> {
+    return this.db
+      .collection(`users/${userId}/createdRoomIds`)
+      .valueChanges()
+      .pipe(
+        switchMap((createdRoomIds: { createdRoomId: string }[]) => {
+          const rooms$$: Observable<Room>[] = createdRoomIds.map(
+            (doc: { createdRoomId: string }) =>
+              this.getRoomById(doc.createdRoomId)
+          );
+          return combineLatest(rooms$$);
+        })
+      );
+  }
+
+  getJoinedRooms(userId: string): Observable<Room[]> {
+    return this.db
+      .collection(`users/${userId}/joinedRoomIds`)
+      .valueChanges()
+      .pipe(
+        switchMap((joinedRoomIds: { joinedRoomId: string }[]) => {
+          const rooms$$: Observable<Room>[] = joinedRoomIds.map(
+            (doc: { joinedRoomId: string }) =>
+              this.getRoomById(doc.joinedRoomId)
+          );
+          return combineLatest(rooms$$);
+        })
+      );
   }
 }
