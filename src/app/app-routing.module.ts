@@ -36,6 +36,15 @@ const routes: Routes = [
     canLoad: [AuthGuard],
     canActivate: [AuthGuard],
   },
+  {
+    path: 'room-detail/:roomId',
+    loadChildren: () =>
+      import('./room-detail/room-detail.module').then(
+        (m) => m.RoomDetailModule
+      ),
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

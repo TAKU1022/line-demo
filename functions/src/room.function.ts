@@ -9,6 +9,6 @@ export const addRoomJoinedUserId = functions
   .onCreate((snap) => {
     const room = snap.data();
     return db
-      .doc(`rooms/${room.roomId}/joinedUserId/${room.ownerId}`)
+      .doc(`rooms/${room.roomId}/joinedUserIds/${room.ownerId}`)
       .set({ joinedUserId: room.ownerId });
   });

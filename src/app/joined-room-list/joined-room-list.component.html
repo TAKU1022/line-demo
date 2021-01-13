@@ -1,1 +1,26 @@
-<p>joined-room-list works!</p>
+<div class="container">
+  <h1>自分が参加しているルーム一覧</h1>
+  <div class="grid">
+    <ng-container *ngFor="let room of rooms$ | async">
+      <a routerLink="/room-detail/{{ room.roomId }}" class="card-link">
+        <mat-card>
+          <h2>{{ room.name }}</h2>
+          <p>{{ room.description }}</p>
+          <p>{{ room.createdAt.toDate() | date }}</p>
+        </mat-card>
+      </a>
+    </ng-container>
+  </div>
+
+  <h1>ページ遷移</h1>
+  <ul class="nav-content">
+    <li class="nav-content__list-item">
+      <a routerLink="/" class="link">トップ</a>
+    </li>
+    <li class="nav-content__list-item">
+      <a routerLink="/created-room-list" class="link"
+        >自分が作成したルーム一覧</a
+      >
+    </li>
+  </ul>
+</div>

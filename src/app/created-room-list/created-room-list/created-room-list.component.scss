@@ -1,0 +1,18 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  margin-bottom: 80px;
+}
+
+.card-link {
+  color: black;
+}
+
+.nav-content {
+  margin-bottom: 56px;
+  padding: 0;
+  &__list-item {
+    margin-bottom: 8px;
+  }
+}
