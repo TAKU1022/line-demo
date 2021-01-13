@@ -1,15 +1,23 @@
 import { Component, OnInit } from '@angular/core';
+import { Room } from '@interfaces/room';
+import { Observable } from 'rxjs';
+import { AuthService } from '../services/auth.service';
+import { RoomService } from '../services/room.service';
 
 @Component({
   selector: 'app-joined-room-list',
   templateUrl: './joined-room-list.component.html',
-  styleUrls: ['./joined-room-list.component.scss']
+  styleUrls: ['./joined-room-list.component.scss'],
 })
 export class JoinedRoomListComponent implements OnInit {
+  private userId: string = this.authService.userId;
 
-  constructor() { }
+  rooms$: Observable<Room[]> = this.roomService.getJoinedRooms(this.userId);
 
-  ngOnInit(): void {
-  }
+  constructor(
+    private authService: AuthService,
+    private roomService: RoomService
+  ) {}
 
+  ngOnInit(): void {}
 }
