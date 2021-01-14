@@ -1,0 +1,28 @@
+.line-content {
+  margin-bottom: 80px;
+}
+
+.line-button {
+  margin-right: 32px;
+  &:nth-last-child(1) {
+    margin: 0;
+  }
+}
+
+.table-content {
+  max-width: 800px;
+  margin: 0 auto 80px;
+}
+
+table {
+  width: 100%;
+  text-align: left;
+}
+
+.nav-content {
+  margin-bottom: 56px;
+  padding: 0;
+  &__list-item {
+    margin-bottom: 8px;
+  }
+}

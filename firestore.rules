@@ -16,7 +16,7 @@ service cloud.firestore {
     match /rooms/{roomId}/joinedUserIds/{joinedUserId} {
       allow read, write: if true;
     }
-    match /rooms/{roomId}/entorylogs/{entorylog} {
+    match /rooms/{roomId}/entryLogs/{entryLogId} {
       allow read, write: if true;
     }
   }
