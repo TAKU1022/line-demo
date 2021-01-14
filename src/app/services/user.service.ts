@@ -15,8 +15,11 @@ export class UserService {
   }
 
   updateUserActiveRoomId(userId: string, roomId: string): Promise<void> {
-    return this.db
-      .doc<User>(`users/${userId}`)
-      .update({ activeRoomId: roomId });
+    const user = this.db.doc<User>(`users/${userId}`);
+    if (roomId) {
+      return user.update({ activeRoomId: roomId });
+    } else {
+      return user.update({ activeRoomId: null });
+    }
   }
 }
